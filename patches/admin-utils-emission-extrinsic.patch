@@ -1,0 +1,36 @@
+diff --git a/pallets/admin-utils/src/lib.rs b/pallets/admin-utils/src/lib.rs
+index b79475699..28ef24b6f 100644
+--- a/pallets/admin-utils/src/lib.rs
++++ b/pallets/admin-utils/src/lib.rs
+@@ -2142,6 +2142,31 @@ pub mod pallet {
+             );
+             Ok(())
+         }
++
++        /// Sets the first emission block number for a subnet.
++        /// This is required for emissions to start running for the subnet.
++        /// It is only callable by the root account.
++        #[pallet::call_index(81)]
++        #[pallet::weight((
++            Weight::from_parts(7_114_000, 0)
++                .saturating_add(<T as frame_system::Config>::DbWeight::get().writes(1))
++                .saturating_add(<T as frame_system::Config>::DbWeight::get().reads(0_u64)),
++            DispatchClass::Operational,
++            Pays::No
++        ))]
++        pub fn sudo_set_first_emission_block_for_subnet(
++            origin: OriginFor<T>,
++            netuid: NetUid,
++            first_emission_block: u64,
++        ) -> DispatchResult {
++            pallet_subtensor::Pallet::<T>::ensure_root_with_rate_limit(origin, netuid)?;
++            pallet_subtensor::FirstEmissionBlockNumber::<T>::insert(netuid, first_emission_block);
++
++            log::debug!(
++                "FirstEmissionBlockNumber( netuid: {netuid:?}, first_emission_block: {first_emission_block:?} )"
++            );
++            Ok(())
++        }
+     }
+ }
+ 
