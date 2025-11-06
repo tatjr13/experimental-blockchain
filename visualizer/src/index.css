@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cyber-dark text-gray-200 antialiased;
+    font-family: 'Inter', 'Roboto', system-ui, -apple-system, sans-serif;
+  }
+
+  * {
+    @apply border-white/10;
+  }
+}
+
+@layer components {
+  /* Glassmorphic panel styling */
+  .glass-panel {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-lg shadow-xl;
+  }
+
+  /* Neon glow button */
+  .neon-button {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-300;
+    @apply hover:shadow-glow hover:scale-105;
+  }
+
+  /* Cyber grid background */
+  .cyber-grid {
+    background-image:
+      linear-gradient(rgba(65, 88, 208, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(65, 88, 208, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
+
+@layer utilities {
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-cyber-darker rounded-lg;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-neon-blue/30 rounded-lg hover:bg-neon-blue/50;
+  }
+
+  /* Text glow effect */
+  .text-glow {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+  }
+}
