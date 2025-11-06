@@ -9,7 +9,7 @@ export interface BlockchainState {
   currentBlock: number;
 }
 
-export function useBlockchain(rpcUrl: string = 'ws://127.0.0.1:9944') {
+export function useBlockchain(rpcUrl: string = 'ws://156.67.24.161:9944') {
   const [state, setState] = useState<BlockchainState>({
     api: null,
     isConnected: false,
